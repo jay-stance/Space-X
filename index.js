@@ -78,13 +78,13 @@ let particles = [];
 
 function startGame() {
     modal.style.display = "none"
-    score = 0;
     setTimeout(() => {
+        score = 0;
+        scoreElem.innerText = score;
         projectiles = [];
         enemies = [];
         particles = [];
         animate();
-        spawnEnemies();
     }, 1500)
 }
 
@@ -108,7 +108,7 @@ function spawnEnemies() {
         }
         const color = `hsl(${Math.random() * 360}, 50%, 50%)`
         enemies.push(new Enemies(x, y, radius, color, velocity))
-    }, 1500);
+    }, 2000);
 }
 
 let animationId;
