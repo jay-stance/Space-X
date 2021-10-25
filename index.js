@@ -80,6 +80,7 @@ function startGame() {
     modal.style.display = "none"
     setTimeout(() => {
         score = 0;
+        time = 0;
         scoreElem.innerText = score;
         projectiles = [];
         enemies = [];
@@ -88,8 +89,10 @@ function startGame() {
     }, 1500)
 }
 
+let time = 2500;
+
 function spawnEnemies() {
-    setInterval(() => {
+    const spawn = setInterval(() => {
         const radius = Math.random() * (30 - 10) + 10;
         let x;
         let y;
@@ -106,9 +109,21 @@ function spawnEnemies() {
             x: Math.cos(angle),
             y: Math.sin(angle)
         }
-        const color = `hsl(${Math.random() * 360}, 50%, 50%)`
-        enemies.push(new Enemies(x, y, radius, color, velocity))
-    }, 2000);
+        const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+        if (time <= 1500) {
+            enemies.push(new Enemies(x, y, radius, color, velocity))
+            enemies.push(new Enemies(x, y, radius, color, velocity))
+        } else {
+            enemies.push(new Enemies(x, y, radius, color, velocity))
+        }
+    }, time);
+    const enemy_spawn_speed = setInterval(() => {
+        console.log(time, "..................")
+        if (time <= 100) {
+            clearInterval(enemy_spawn_speed)
+        }
+        time -= 100
+    }, 3000);
 }
 
 let animationId;
@@ -141,7 +156,7 @@ function animate() {
         if (dist - player.radius - enemy.radius < 1) {
             cancelAnimationFrame(animationId);
             pointsElem.innerText = score;
-            modal.style.display = "block"
+            modal.style.display = "flex"
         }
 
         projectiles.forEach((projectile, projectileCount) => {
