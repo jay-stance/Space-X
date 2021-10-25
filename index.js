@@ -83,10 +83,9 @@ function startGame() {
         projectiles = [];
         enemies = [];
         particles = [];
-        console.log(enemies, "...............")
-        spawnEnemies();
         animate();
-    }, 1000)
+        spawnEnemies();
+    }, 1500)
 }
 
 function spawnEnemies() {
