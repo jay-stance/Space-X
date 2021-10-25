@@ -83,8 +83,9 @@ function startGame() {
         projectiles = [];
         enemies = [];
         particles = [];
-        animate();
+        console.log(enemies, "...............")
         spawnEnemies();
+        animate();
     }, 1000)
 }
 
@@ -108,13 +109,13 @@ function spawnEnemies() {
         }
         const color = `hsl(${Math.random() * 360}, 50%, 50%)`
         enemies.push(new Enemies(x, y, radius, color, velocity))
-    }, 1000);
+    }, 1500);
 }
 
 let animationId;
 let score = 0;
 
-function animate(projectile) {
+function animate() {
     animationId = requestAnimationFrame(animate);
     c.fillStyle = "rgba(0, 0, 0, 0.1)";
     c.fillRect(0, 0, canvas.width, canvas.height)
