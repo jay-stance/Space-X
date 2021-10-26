@@ -93,7 +93,7 @@ function startGame() {
     }, 1500)
 }
 
-let time = 2500;
+let time = 700;
 
 function spawnEnemies() {
     const spawn = setInterval(() => {
