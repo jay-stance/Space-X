@@ -4,6 +4,9 @@ const modal = document.querySelector(".modal")
 const startGameBtn = document.querySelector(".modal button");
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
+const game_audio = document.querySelector(".game_audio");
+const over = document.querySelector(".over");
+const hit = document.querySelector(".hit");
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -77,7 +80,8 @@ let enemies = [];
 let particles = [];
 
 function startGame() {
-    modal.style.display = "none"
+    modal.style.display = "none";
+    game_audio.muted = false
     setTimeout(() => {
         score = 0;
         time = 0;
@@ -111,6 +115,7 @@ function spawnEnemies() {
         }
         const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
         if (time <= 1500) {
+            enemies.push(new Enemies(x, y, radius, color, velocity))
             enemies.push(new Enemies(x, y, radius, color, velocity))
             enemies.push(new Enemies(x, y, radius, color, velocity))
         } else {
@@ -154,6 +159,9 @@ function animate() {
         enemy.update();
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
         if (dist - player.radius - enemy.radius < 1) {
+            game_audio.muted = true;
+            over.muted = false;
+            over.play()
             cancelAnimationFrame(animationId);
             pointsElem.innerText = score;
             modal.style.display = "flex"
@@ -162,6 +170,8 @@ function animate() {
         projectiles.forEach((projectile, projectileCount) => {
             const dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
             if (dist - enemy.radius - projectile.radius < 1) {
+                hit.muted = false;
+                hit.play()
                 for (let i = 0; i < enemy.radius * 2; i++) {
                     const velocity = {
                         x: (Math.random() - 0.5) * (Math.random() * 6),
@@ -206,3 +216,9 @@ window.addEventListener("click", (e) => {
 
 spawnEnemies();
 animate();
+game_audio.muted = true;
+document.body.addEventListener("mousemove", () => {
+    console.log("//////////////////////////")
+    game_audio.muted = false
+    game_audio.play()
+})

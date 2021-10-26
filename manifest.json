@@ -1,0 +1,14 @@
+{
+    "name": "Space-X",
+    "short_name": "Space-X",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#000",
+    "theme_color": "#8a2be2",
+    "orientation": "portrait-primary",
+    "icons": [{
+        "src": "./assets/logo.png",
+        "type": "image/png",
+        "sizes": "384x384"
+    }]
+}

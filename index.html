@@ -10,7 +10,8 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Space Shooting game" />
     <link rel="apple-touch-icon" href="./assets/Space-X.png" />
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
         body {
@@ -19,6 +20,10 @@
             overflow: hidden;
             font-family: 'Fjalla One', sans-serif;
             background: #000;
+        }
+        
+        .audio {
+            display: none;
         }
         
         .modal {
@@ -97,6 +102,10 @@
                 border-radius: 10px;
                 font-size: 25px;
             }
+            .audio {
+                width: 100%;
+                height: 100%;
+            }
         }
     </style>
 </head>
@@ -114,10 +123,17 @@
         <button>Start Game</button>
     </div>
 
+    <div class="audio">
+        <audio autoplay muted="true" loop class="game_audio" src="./assets/game.wav"></audio>
+        <audio autoplay muted="true" class="over" src="./assets/over.wav"></audio>
+        <audio autoplay muted="true" class="hit" src="./assets/hit.wav"></audio>
+    </div>
+
     <canvas></canvas>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js" integrity="sha512-eP6ippJojIKXKO8EPLtsUMS+/sAGHGo1UN/38swqZa1ypfcD4I0V/ac5G3VzaHfDaklFmQLEs51lhkkVaqg60Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="index.js"></script>
+    <script src="./serviceWorker.js"></script>
 </body>
 
 </html>
