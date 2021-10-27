@@ -93,7 +93,7 @@ function startGame() {
     }, 1500)
 }
 
-let time = 1200;
+let time = 1100;
 
 function spawnEnemies() {
     const spawn = setInterval(() => {
@@ -199,6 +199,11 @@ function animate() {
                         projectiles.splice(projectileCount, 1)
                     }, 0);
                 }
+
+                // Adding super feature 
+                if (score >= 15000) {
+                    player.color = "salmon"
+                }
             }
         })
     });
@@ -210,7 +215,15 @@ window.addEventListener("click", (e) => {
         x: Math.cos(angle) * 5,
         y: Math.sin(angle) * 5
     }
-    projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+    if (score >= 15000) {
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+    } else {
+        projectiles.push(new Projectiles(x, y, 5, "white", velocity))
+    }
 })
 
 
