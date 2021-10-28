@@ -1,3 +1,5 @@
+const { spawn } = require("child_process");
+
 const scoreElem = document.getElementById("score");
 const pointsElem = document.querySelector(".points");
 const modal = document.querySelector(".modal")
@@ -158,6 +160,8 @@ function animate() {
     enemies.forEach((enemy, enemyCount) => {
         enemy.update();
         const dist = Math.hypot(player.x - enemy.x, player.y - enemy.y);
+
+        // player hits 
         if (dist - player.radius - enemy.radius < 1) {
             game_audio.muted = true;
             over.muted = false;
@@ -222,3 +226,14 @@ document.body.addEventListener("mousemove", () => {
     game_audio.muted = false
     game_audio.play()
 })
+
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        game_audio.muted = true;
+        clearInterval(spawn)
+        console.log('bye');
+    } else {
+        game_audio.muted = false;
+        console.log('well back');
+    }
+}, false);
