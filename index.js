@@ -1,5 +1,3 @@
-const { spawn } = require("child_process");
-
 const scoreElem = document.getElementById("score");
 const pointsElem = document.querySelector(".points");
 const modal = document.querySelector(".modal")
